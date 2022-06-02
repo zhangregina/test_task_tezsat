@@ -9,6 +9,8 @@ urlpatterns = [
     path('api/v1/products/<int:id>/', views.ProductDetailPutDeleteAPIView.as_view(), name='product_detail_view'),
     path('api/v1/add-comment/', views.CommentCreateAPIView.as_view(), name='add_comment_view'),
     path('api/v1/comment/<int:id>/', views.CommentPutDeleteAPIView.as_view(), name='edit_comment_view'),
+    # path('api/v1/products/?user_related=/', views.UserProductsViewSet.as_view()),
+    # path('api/v1/products/?ordering=/', views.UserProductsViewSet.as_view())
 
 
 ]
