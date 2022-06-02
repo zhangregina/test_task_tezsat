@@ -7,8 +7,8 @@ from django.contrib.auth import authenticate
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        lookup_field = 'id'
         fields = ['id', 'email', 'product_related']
+        lookup_field = 'id'
 
         # def create(self, validated_data):
         #     user = self.context['request'].user

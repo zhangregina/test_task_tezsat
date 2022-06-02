@@ -9,5 +9,6 @@ urlpatterns = [
     path('userview/<int:id>/', UserListAPIView.as_view()),
 
 
+
 ]
 

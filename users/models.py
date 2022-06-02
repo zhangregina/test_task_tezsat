@@ -1,4 +1,3 @@
-from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
@@ -16,8 +15,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    product_related = models.ForeignKey('products.Product', on_delete=models.CASCADE,
-                                        related_name='product_related', null=True)
+    # # product_related = models.ForeignKey('products.Product', on_delete=models.CASCADE,
+    #                                     related_name='product_related', null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

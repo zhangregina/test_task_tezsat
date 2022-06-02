@@ -11,7 +11,7 @@ class ProductSerializer(serializers.ModelSerializer):
             'description',
             'title',
             'image',
-            # 'user_related'
+            'user'
 
         ]
 
