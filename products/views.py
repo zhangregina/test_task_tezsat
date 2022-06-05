@@ -1,10 +1,4 @@
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics
-from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView, GenericAPIView, CreateAPIView
-from rest_framework.viewsets import ModelViewSet
-
-from users.serializers import UserSerializer
 from .serializers import *
 from .models import Product, Comment
 
