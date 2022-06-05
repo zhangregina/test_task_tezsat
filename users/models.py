@@ -13,10 +13,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     password = models.CharField(max_length=50, null=True, blank=True)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField('Активный', default=True)
     date_joined = models.DateTimeField(default=timezone.now)
-    # # product_related = models.ForeignKey('products.Product', on_delete=models.CASCADE,
-    #                                     related_name='product_related', null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

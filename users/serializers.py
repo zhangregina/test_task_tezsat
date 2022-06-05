@@ -1,19 +1,28 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
+
+
+from products.models import Product
 from .models import *
-from django.contrib.auth import authenticate
+
+
+class ProductListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
 
 
 class UserSerializer(serializers.ModelSerializer):
+    products = ProductListSerializer(many=True)
+
     class Meta:
         model = CustomUser
-        fields = ['id', 'email', 'product_related']
-        lookup_field = 'id'
+        fields = ['id', 'email', 'products']
 
-        # def create(self, validated_data):
-        #     user = self.context['request'].user
-        #     # print("User is")
-        #     print(user)
+    def to_representation(self, instance): #переопределяет данные в зависимости от юзера кот залогинился
+        data = super().to_representation(instance)
+        if data['id'] == self.context['request'].user.id:
+            return data
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
@@ -49,33 +58,5 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=255)
-    username = serializers.CharField(max_length=255, read_only=True)
     password = serializers.CharField(max_length=128, write_only=True)
-    token = serializers.CharField(max_length=255, read_only=True)
 
-    def validate(self, data):
-        email = data.get('email', None)
-        password = data.get('password', None)
-
-        if email is None:
-            raise serializers.ValidationError(
-                'An email address is required to log in.'
-            )
-
-        if password is None:
-            raise serializers.ValidationError(
-                'A password is required to log in.'
-            )
-        user = authenticate(username=email, password=password)
-        if user is None:
-            raise serializers.ValidationError(
-                'A user with this email and password was not found.'
-            )
-        if not user.is_active:
-            raise serializers.ValidationError(
-                'This user has not been activated.'
-            )
-        return {
-            'email': user.email,
-            'token': user.token
-        }
