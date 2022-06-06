@@ -11,7 +11,8 @@ class ProductSerializer(serializers.ModelSerializer):
             'description',
             'title',
             'image',
-            'user'
+            'user',
+            'categories',
 
         ]
 
@@ -20,6 +21,12 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['title']
 
 
 class ProductDetailSerializer(serializers.ModelSerializer):

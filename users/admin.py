@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from products.models import Product
+from products.models import Product, Category
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 from django.contrib.admin.options import TabularInline
@@ -19,13 +19,19 @@ class ProductsInline(admin.TabularInline):
 
     get_image.short_description = "Изображение"
 
+# class CategoryInline(admin.TabularInline):
+#     model = Category
+#     fields = 'title', 'parent'
+#     extra = 1
+#     verbose_name = 'Category'
+#     verbose_name_plural = 'Categories'
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    inlines = (ProductsInline,)
+    inlines = (ProductsInline, )
     list_display = ('email', 'is_staff', 'is_active',)
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (

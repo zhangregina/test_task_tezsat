@@ -5,10 +5,13 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('api/v1/products/', views.ProductListCreateAPIView.as_view(), name='products_view'),
-    path('api/v1/products/<int:id>/', views.ProductDetailPutDeleteAPIView.as_view(), name='product_detail_view'),
-    path('api/v1/add-comment/', views.CommentCreateAPIView.as_view(), name='add_comment_view'),
-    path('api/v1/comment/<int:id>/', views.CommentPutDeleteAPIView.as_view(), name='edit_comment_view'),
+    path('add-product/', views.ProductListCreateAPIView.as_view(), name='products_view'),
+    path('product/<int:id>/', views.ProductDetailPutDeleteAPIView.as_view(), name='product_detail_view'),
+    path('add-comment/', views.CommentCreateAPIView.as_view(), name='add_comment_view'),
+    path('comment/<int:id>/', views.CommentPutDeleteAPIView.as_view(), name='edit_comment_view'),
+    path('add-category/', views.CategoryCreateAPIView.as_view(), name='add_category_view'),
+    path('category/<int:id>/', views.CategoryPutDeleteAPIView.as_view(), name='edit_category_view'),
+
 
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
